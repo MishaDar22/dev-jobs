@@ -1,12 +1,12 @@
-import os
-import django
-
-os.environ["DJANGO_SETTINGS_MODULE"] = 'conf.settings'
-django.setup()
-
-
-from jobs.models import Specialty, Company, Vacancy
-
+# import os
+# import django
+#
+# os.environ["DJANGO_SETTINGS_MODULE"] = 'conf.settings'
+# django.setup()
+#
+#
+# from jobs.models import Specialty, Company, Vacancy
+#
 # if __name__ == '__main__':
 #     for one_specialty in jobs.data.specialties:
 #         specialty = Specialty.objects.create(

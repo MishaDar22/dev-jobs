@@ -1,7 +1,6 @@
-from django.contrib.auth.models import User
 from django.db.models import Count
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotFound, Http404, HttpResponseRedirect
+from django.http import HttpResponseNotFound, Http404
 from django.urls import reverse
 from django.views import View
 
@@ -107,7 +106,6 @@ class MyCompany(View):
             context = {
                 'form': form,
             }
-
         return render(request, 'company-edit.html', context=context)
 
     def post(self, request):
@@ -115,8 +113,6 @@ class MyCompany(View):
         company = request.user.mycompany.first()
         if form.is_valid():
             data = form.cleaned_data
-            user = request.user
-            print('IS VALID')
             company.name = data['name']
             company.location = data['location']
             company.logo = data['logo']
@@ -125,7 +121,6 @@ class MyCompany(View):
             company.save()
 
             return redirect('/mycompany/')
-        print('IS INVALID')
         return render(request, 'company_new_create.html', {'form': form})
 
 
@@ -137,7 +132,7 @@ class MyCompanyLetsStart(View):
 class MyCompanyCreate(View):
     def get(self, request):
         context = {
-            'form': CompanyForm
+            'form': CompanyForm,
         }
         return render(request, 'company_new_create.html', context=context)
 
@@ -146,17 +141,15 @@ class MyCompanyCreate(View):
         if form.is_valid():
             data = form.cleaned_data
             user = request.user
-            print('IS VALID')
             company = Company.objects.create(
                 name=data['name'],
                 location=data['location'],
                 logo=data['logo'],
                 description=data['description'],
                 employee_count=data['employee_count'],
-                owner=user
+                owner=user,
             )
             return redirect('/mycompany/')
-        print('IS INVALID')
         return render(request, 'company_new_create.html', {'form': form})
 
 
@@ -169,13 +162,13 @@ class MyVacancies(View):
             return redirect('/mycompany/vacancies/letsstart/')
 
         context = {
-            'vacancies': vacancies
+            'vacancies': vacancies,
         }
         return render(request, 'vacancy-list.html', context=context)
 
 
 class MyVacanciesLestsStart(View):
-    def get(self, request,):
+    def get(self, request):
         return render(request, 'vacancy_lets-start.html')
 
 
@@ -192,7 +185,6 @@ class MyVacanciesCreate(View):
         if form.is_valid():
             data = form.cleaned_data
             company = request.user.mycompany.first()
-            print('IS VALID')
             vacancy = Vacancy.objects.create(
                 title=data['title'],
                 description=data['description'],
@@ -203,7 +195,6 @@ class MyVacanciesCreate(View):
                 company=company,
             )
             return redirect('/mycompany/vacancies/')
-        print('IS INVALID')
         return render(request, 'company_new_create.html', {'form': form})
 
 
@@ -232,8 +223,6 @@ class OneOfMyVacancy(View):
             company = request.user.mycompany.first()
             vacancy = company.vacancies.get(id=id_vacancy)
             data = form.cleaned_data
-            user = request.user
-            print('IS VALID')
             vacancy.title = data['title']
             vacancy.specialty_id = data['specialty']
             vacancy.salary_min = data['salary_min']
@@ -242,5 +231,4 @@ class OneOfMyVacancy(View):
             vacancy.skills = data['skills']
             vacancy.save()
             return redirect(request.path)
-        print('IS INVALID')
         return render(request, 'company_new_create.html', {'form': form})

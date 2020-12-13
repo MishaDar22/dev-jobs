@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from jobs.views import MainView, ListVacanciesView, VacanciesOfSpecialityView, CompanyView, VacancyView, \
-    custom_handler404, ApplicateOnVacancy, MyCompany, MyVacancies, OneOfMyVacancy, MyCompanyLetsStart, MyCompanyCreate, \
+    custom_handler404, ApplicateOnVacancy, MyCompany, MyVacancies, OneOfMyVacancy, MyCompanyLetsStart, MyCompanyCreate,\
     MyVacanciesLestsStart, MyVacanciesCreate
 from login.views import register
 
