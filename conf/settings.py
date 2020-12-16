@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7e=)oh&ilw820#8(nsl&f&bgo*!h@6gsk_t@aq$z)tukr*@_f$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'local host']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -157,3 +157,5 @@ MEDIA_SPECIALITY_IMAGE_DIR = 'speciality_images'
 LOGIN_REDIRECT_URL = "/mycompany/"
 
 LOGOUT_REDIRECT_URL = "/"
+
+STATIC_ROOT = 'static'
